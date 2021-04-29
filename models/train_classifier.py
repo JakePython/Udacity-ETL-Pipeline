@@ -29,7 +29,7 @@ def load_data(database_filepath):
         Y - Returns the categories of the dataset.  This will be used for classification based off of the input X
         y.keys - Just returning the columns of the Y columns
     '''
-    engine = create_engine('sqlite://' + database_filepath)
+    engine = create_engine('sqlite:///' + database_filepath)
     df =  pd.read_sql_table('DisasterResponse', engine)
     X = df.message.values
     y = df.iloc[:,5:]
