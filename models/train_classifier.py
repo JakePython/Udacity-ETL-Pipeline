@@ -5,22 +5,25 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sqlalchemy import create_engine
 import nltk
-nltk.download(['punkt', 'wordnet'])
-from nltk.tokenize import word_tokenize
+import re
+import pickle
+
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
-import re
-from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.grid_search import GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import classification_report
 from sklearn.neighbors import KNeighborsClassifier
-import pickle
+
+from nltk.tokenize import word_tokenize
+nltk.download(['punkt', 'wordnet'])
+from nltk.stem import WordNetLemmatizer
 
 def load_data(database_filepath):
     '''
+    Loads X and Y and gets category names
     INPUT 
         database_filepath - Filepath used for importing the database     
     OUTPUT
@@ -31,22 +34,26 @@ def load_data(database_filepath):
     '''
     engine = create_engine('sqlite:///' + database_filepath)
     df =  pd.read_sql_table('DisasterResponse', engine)
+    
     X = df.message.values
     y = df.iloc[:,5:]
+    
     return X, y, y.keys()
 
 def tokenize(text):
     '''
     INPUT 
-        text: Text to be processed   
+        text:(string): input message to tokenize  
     OUTPUT
-        Returns a processed text variable that was tokenized, lower cased, stripped, and lemmatized
+        tokens (list): processed text variable that has been tokenized, put in lower case, stripped, and lemmatized
     '''
     tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
+    
     clean_tokens = []
-    for tok in tokens:
-        clean_tok = lemmatizer.lemmatize(tok).lower().strip()
+    
+    for tokn in tokens:
+        clean_tok = lemmatizer.lemmatize(tokn).lower().strip()
         clean_tokens.append(clean_tok)
 
     return clean_tokens
@@ -68,9 +75,9 @@ def build_model(X_train,y_train):
     
     parameters = {  
         'clf__estimator__min_samples_split': [2, 4],
-        #'clf__estimator__max_features': ['log2', 'auto', 'sqrt', None],
-        #'clf__estimator__criterion': ['gini', 'entropy'],
-        #'clf__estimator__max_depth': [None, 25, 50, 100, 150, 200],
+        'clf__estimator__max_features': ['log2', 'auto', 'sqrt', None],
+        'clf__estimator__criterion': ['gini', 'entropy'],
+        'clf__estimator__max_depth': [None, 25, 50, 100, 150, 200],
     }
     cv = GridSearchCV(estimator=pipeline, param_grid=parameters)
     cv.fit(X_train,y_train)
