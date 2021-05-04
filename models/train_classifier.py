@@ -3,11 +3,11 @@ import sys
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from sqlalchemy import create_engine
 import nltk
 import re
 import pickle
 
+from sqlalchemy import create_engine
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
@@ -75,9 +75,9 @@ def build_model(X_train,y_train):
     
     parameters = {  
         'clf__estimator__min_samples_split': [2, 4],
-        'clf__estimator__max_features': ['log2', 'auto', 'sqrt', None],
-        'clf__estimator__criterion': ['gini', 'entropy'],
-        'clf__estimator__max_depth': [None, 25, 50, 100, 150, 200],
+        #'clf__estimator__max_features': ['log2', 'auto', 'sqrt', None],
+        #'clf__estimator__criterion': ['gini', 'entropy'],
+        #'clf__estimator__max_depth': #[None, 25, 50, 100, 150, 200],
     }
     cv = GridSearchCV(estimator=pipeline, param_grid=parameters)
     cv.fit(X_train,y_train)
