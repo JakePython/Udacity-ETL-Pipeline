@@ -91,7 +91,7 @@ def evaluate_model(pipeline, X_test, Y_test, category_names):
         y_test: Label features, testing set
         category_names: List of the categories 
     OUTPUT
-        This method does nto specifically return any data to its calling method.
+        This method does not specifically return any data to its calling method.
         However, it prints out the precision, recall and f1-score
     '''
     # predict on test data
