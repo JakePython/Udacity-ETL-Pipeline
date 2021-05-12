@@ -15,16 +15,16 @@ Figure Eight has provided data related to messages, categorized into different c
 Installation
 This project requires Python 3.x and the following Python libraries installed:
 
--NumPy
--Pandas
--Matplotlib
--Json
--Plotly
--Nltk
--Flask
--Sklearn
--Sqlalchemy
--Pickle
+*NumPy
+*Pandas
+*Matplotlib
+*Json
+*Plotly
+*Nltk
+*Flask
+*Sklearn
+*Sqlalchemy
+*Pickle
 
 The process was carried out as follows:
 1.	Data Processing Assessing and cleaning the data, so that it can be utilized by machine learning algorithms. See details in the ../data/process_data.py .
