@@ -15,9 +15,9 @@ Figure Eight has provided data related to messages, categorized into different c
 Installation
 This project requires Python 3.x and the following Python libraries installed:
 
-*NumPy
-*Pandas
-*Matplotlib
+1.NumPy
+1.Pandas
+1.Matplotlib
 *Json
 *Plotly
 *Nltk
