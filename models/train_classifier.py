@@ -10,9 +10,8 @@ import pickle
 from sqlalchemy import create_engine
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
-from sklearn.grid_search import GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import classification_report
 from sklearn.neighbors import KNeighborsClassifier
